@@ -30,6 +30,22 @@ app.get('/', (req, res) => {
   res.send('Savitri AI API is running...');
 });
 
+// Keep-alive ping to prevent Render free-tier from sleeping
+const https = require('https');
+setInterval(() => {
+  const backendUrl = 'https://savitri-backend.onrender.com';
+  const frontendUrl = 'https://savitri-frontend.onrender.com'; // User needs to use this name on Render
+  
+  https.get(backendUrl, (res) => {
+    console.log(`Keep-alive ping backend: ${res.statusCode}`);
+  }).on('error', (e) => {});
+  
+  https.get(frontendUrl, (res) => {
+    console.log(`Keep-alive ping frontend: ${res.statusCode}`);
+  }).on('error', (e) => {});
+}, 14 * 60 * 1000); // 14 minutes
+
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
