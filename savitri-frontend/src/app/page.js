@@ -76,7 +76,7 @@ export default function Home() {
   const fetchSuggestions = async (val) => {
     if (!val || val.length < 2) { setSuggestions([]); return; }
     try {
-      const res = await fetch(`http://localhost:5000/api/medicines/search-master?q=${encodeURIComponent(val)}&limit=7`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/medicines/search-master?q=${encodeURIComponent(val)}&limit=7`);
       const data = await res.json();
       setSuggestions(Array.isArray(data) ? data : []);
     } catch { setSuggestions([]); }

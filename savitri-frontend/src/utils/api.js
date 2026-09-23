@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api` : `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api`;
 
 export const fetchDashboardAnalytics = async (token, pharmacyId) => {
   try {

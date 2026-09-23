@@ -70,7 +70,7 @@ export default function PharmacyDashboard() {
         const token = localStorage.getItem('savitri_token');
         if (!token) return;
 
-        const res = await fetch('http://localhost:5000/api/pharmacies/dashboard/analytics', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/pharmacies/dashboard/analytics`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

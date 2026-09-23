@@ -41,7 +41,7 @@ export default function PharmacyPublicPage() {
   useEffect(() => {
     const fetchPharmacy = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/pharmacies/slug/${slug}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/pharmacies/slug/${slug}`);
         if (!res.ok) {
           setError('Pharmacy not found');
         } else {
@@ -61,7 +61,7 @@ export default function PharmacyPublicPage() {
       const fetchReviews = async () => {
         setReviewLoading(true);
         try {
-          const res = await fetch(`http://localhost:5000/api/reviews?pharmacyId=${pharmacy._id}`);
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reviews?pharmacyId=${pharmacy._id}`);
           if (res.ok) {
             const data = await res.json();
             setReviews(data.data || data);
@@ -88,7 +88,7 @@ export default function PharmacyPublicPage() {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/reviews', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export default function PharmacyPublicPage() {
         setRatingInput(5);
         
         // Refresh reviews
-        const revRes = await fetch(`http://localhost:5000/api/reviews?pharmacyId=${pharmacy._id}`);
+        const revRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reviews?pharmacyId=${pharmacy._id}`);
         if (revRes.ok) {
           const revData = await revRes.json();
           setReviews(revData.data || revData);

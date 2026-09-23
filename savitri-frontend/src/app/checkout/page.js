@@ -32,7 +32,7 @@ export default function CheckoutPage() {
 
       // We send a separate request for each item in the cart
       const promises = cart.map(item => {
-        return fetch('http://localhost:5000/api/reservations', {
+        return fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reservations`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

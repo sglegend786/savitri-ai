@@ -30,7 +30,7 @@ export default function InventoryManagement() {
   const fetchInventory = async () => {
     try {
       const token = localStorage.getItem('savitri_token');
-      const res = await fetch('http://localhost:5000/api/medicines/my', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/medicines/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -69,7 +69,7 @@ export default function InventoryManagement() {
       if (value.length > 2) {
         try {
           const token = localStorage.getItem('savitri_token');
-          const res = await fetch(`http://localhost:5000/api/medicines/search-master?q=${value}`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/medicines/search-master?q=${value}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           if (res.ok) {
@@ -106,7 +106,7 @@ export default function InventoryManagement() {
     }
     
     try {
-      const res = await fetch('http://localhost:5000/api/medicines', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/medicines`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

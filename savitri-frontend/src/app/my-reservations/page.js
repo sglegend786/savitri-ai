@@ -87,7 +87,7 @@ export default function MyReservations() {
     router.push('/checkout');
   };
 
-  const { data, error, isLoading } = useSWR('http://localhost:5000/api/reservations', fetcher, { refreshInterval: 5000 });
+  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reservations`, fetcher, { refreshInterval: 5000 });
   
   const reservations = data || [];
   const loading = isLoading;

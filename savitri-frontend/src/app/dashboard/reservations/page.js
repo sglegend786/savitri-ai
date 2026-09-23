@@ -18,7 +18,7 @@ export default function Reservations() {
   const [filter, setFilter] = useState('Pending');
 
   const { data: reservations = [], mutate, isLoading: loading } = useSWR(
-    'http://localhost:5000/api/reservations', 
+    `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reservations`, 
     fetcher, 
     { refreshInterval: 5000 }
   );
@@ -26,7 +26,7 @@ export default function Reservations() {
   const handleUpdateStatus = async (id, newStatus) => {
     try {
       const token = localStorage.getItem('savitri_token');
-      const res = await fetch(`http://localhost:5000/api/reservations/${id}/status`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/reservations/${id}/status`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

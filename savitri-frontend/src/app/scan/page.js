@@ -25,7 +25,7 @@ export default function PrescriptionScanner() {
         logger: m => console.log(m)
       });
       
-      const response = await fetch('http://localhost:5000/api/search/match-prescription-text', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/search/match-prescription-text`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
